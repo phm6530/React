@@ -1,7 +1,7 @@
 // ExpenseItem.js
 import ExpenseDate from './ExpenseDate';
 import './ExpenseItem.css';
-import Card from './card';
+import Card from '../ui/card';
 
 export default function Expenseitem({ date, title, Amout }) {
 

@@ -1,5 +1,5 @@
 import Expenseitem from './Expenseitem';
-import Card from './card';
+import Card from '../ui/card';
 import './Expense.css'
 
 
@@ -11,7 +11,7 @@ export default function Expense(props){
             {props.arr.map((e, index)=>{
                 return (
                 <Expenseitem 
-                    key={index} // React에서는 각각의 요소에 key를 지정해주는 것이 좋습니다.
+                    key={index} 
                     date={e.date}
                     title={e.title}
                     Amout={e.Amout}
