@@ -14,7 +14,7 @@ const ExpenseForm = (props) =>{
         if(id === 'title'){
             setEnter((prev) => ({...prev, title : value}));
         }else if(id === 'Amount'){
-            setEnter((prev) => ({...prev, Amount :  value}));
+            setEnter((prev) => ({...prev, Amount :  +value}));
         }else if(id === 'date'){
             setEnter((prev) => ({...prev, date : new Date(value) }));
         }
@@ -32,6 +32,7 @@ const ExpenseForm = (props) =>{
             Amount : '',
             date : '',
         }))
+        props.cansel();
       
     };
     const date = enter.date ?  enter.date.toISOString().split('T')[0] : enter.date ;
@@ -53,6 +54,7 @@ const ExpenseForm = (props) =>{
                 </div>
             </div>
             <div className='new-expense__actions'>
+                <button onClick={()=>props.cansel()}>Cansel</button>
                 <button type='submit'>Add Expense</button>
             </div>
         </form>

@@ -1,31 +1,27 @@
-import Expenseitem  from './Expenseitem';
 import Card from '../ui/card';
 import './Expense.css'
 import ExpensesFilter from './ExpenseFilter';
 import { useState } from 'react';
+import ExpenseList from './ExpenseList';
+import Chart from '../Chart/Chat'
+
 
 export default function Expense(props){
-    const [fitlerYear , setFilterYear] = useState('All');
+    const [fitlerYear , setFilterYear] = useState('2023');
     
     const ExpenseYear = (year) =>{
         setFilterYear(year);
     }
     
-    const filterData = fitlerYear === 'All' 
-    ? props.arr 
-    : props.arr.filter((e)=> e.date.toLocaleString('kr-KR').slice(0,4) === fitlerYear);
-     
-    
+    const filterData = props.arr.filter((e)=> e.date.toLocaleString('kr-KR').slice(0,4) === fitlerYear);
 
-    // useEffect(()=>{
-    //     console.log(Year);
-    // },[Year]);
     
     return(
         <>
         <Card className='expenses'>
             <ExpensesFilter selected={fitlerYear} ExpenseYear={ExpenseYear}/>
-            {filterData.length === 0 ? 'No data' : filterData.map((e, idx) => <Expenseitem key={idx} data={e} />)}
+            <Chart ChartDate={filterData} />
+            <ExpenseList items={filterData}/>
         </Card>
         </>
     )
