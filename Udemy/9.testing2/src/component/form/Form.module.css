@@ -1,0 +1,30 @@
+.Form{
+    background-color: #fff;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 15px;
+    border-radius: .3em;
+}
+
+.Form label{
+    display: block;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.Form input{
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Form input:focus{
+    outline: none;
+}
+
+.Form p {
+    padding: 0;
+    margin: 0;
+}
+
