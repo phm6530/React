@@ -17,11 +17,12 @@ export default function FormCalculator(props){
     const [fromData , setFromData ] = useState(initalData);
 
     const formHandler = ( id , e) =>{
-        setFromData(prev => ({...prev , [id] : e}));
+        setFromData(prev => ({...prev , [id] : +e}));
     }
 
     const reset = () =>{
         setFromData(initalData);
+        props.reset(null);
     }
     
     const formSubmit = (e)=>{
@@ -72,7 +73,7 @@ export default function FormCalculator(props){
             </p>
             </div>
             <p className="actions">
-                <button  className="buttonAlt" onClick={reset}>Reset</button>
+                <button type='reset' className="buttonAlt" onClick={reset}>Reset</button>
                 <button type="submit" className="button">Submit</button>
             </p>
       </form>

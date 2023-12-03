@@ -1,13 +1,15 @@
-import { useState } from 'react';
+import { useState} from 'react';
 import classes from './Form.module.css';
 
 import Popup from '../popup/popup';
 import Button from '../ui/Button';
 
 export default function Form(props){
-    const [ popupView , setPopupView ] = useState(true);
-    const [msg, setMsg] = useState('');
+    // const nameRef = useRef();
+    // const ageRef = useRef();
 
+    const [ popupView , setPopupView ] = useState(null);
+    // console.log(popupView);
     const inistalObejct = {
         UserName : "",
         UserAge : ""
@@ -20,29 +22,35 @@ export default function Form(props){
     }
 
     const Close = () =>{
-        setPopupView(true);
+        setPopupView(null);
     }
 
     const onSubmitData = (e) =>{
         e.preventDefault();
+        // const name = nameRef.current.value;
+        // const age = ageRef.current.value;
         for(const item in value){
             if(!value[item]){
-                setMsg('빈칸을 확인하세요');
-                setPopupView(false);
+                setPopupView({
+                    message : '빈칸을 확인하세요'
+                });
                 return;
+    
             }else if(+value[item] < 1){
-                setMsg('1보다 작은 수는 입력 불가합니다.');
-                setPopupView(false);
+                setPopupView({
+                    message : '1보다 작은 수는 입력 불가합니다.'
+                });
                 return;
             }
         }
+        
         props.data(value);
         setValue(inistalObejct);
     }
     
     return(
         <>
-        {!popupView && <Popup message={msg} view={Close} onConfirm={Close} />}
+        {popupView && <Popup data={popupView} view={Close} />}
         <form className={classes.Form} onSubmit={onSubmitData}>
             
             <p>
@@ -52,6 +60,7 @@ export default function Form(props){
                     name="UserName"
                     value={value.UserName}
                     onChange={({target: {value} , target : {name}})=> ChangeValue(name, value) }
+                    // ref={nameRef}
                 />
             </p>
 
@@ -62,6 +71,7 @@ export default function Form(props){
                     name="UserAge"
                     value={value.UserAge}
                     onChange={({target: {value} , target : {name}})=> ChangeValue(name, value) }
+                    // ref={ageRef}
                 />
             </p>
 

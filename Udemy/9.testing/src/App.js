@@ -32,14 +32,11 @@ function App() {
     }
   }
 
-  
-
-
   return (
     <div>
      <Header img={logo}/>
-     <FormCalculator calculateHandler={calculateHandler} />
-     {!Data && <p>no investment calculated Yet.</p>}
+     <FormCalculator reset={setData} calculateHandler={calculateHandler} />
+     {!Data && <p style={{textAlign:'center'}}>no investment calculated Yet.</p>}
      {Data && <FormResult data={yearlyData}/>}
      
     </div>
