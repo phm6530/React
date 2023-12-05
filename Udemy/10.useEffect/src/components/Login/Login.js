@@ -1,50 +1,71 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
 
+const reducer = (state , action) =>{
+  switch(action.type){
+    case 'EMAIL_INPUT' :
+      return {...state, value : action.val , isValid : action.val.includes('@') };
+    case 'EMAIL_BLUR' :
+      return {...state , value : state.value , isValid : state.isValid};
+    case 'PASSWORD_INPUT' : 
+      return {...state,  password : action.password , passwordIsValid : action.password.trim().length > 6};
+    default :
+      return state;
+  }
+
+}
+
 const Login = (props) => {
-  const [enteredEmail, setEnteredEmail] = useState('');
-  const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState('');
-  const [passwordIsValid, setPasswordIsValid] = useState();
+  // const [enteredEmail, setEnteredEmail] = useState('');
+  // const [emailIsValid, setEmailIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState('');
+  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
+  const [emailIsValid , dispatch] = useReducer(reducer , {
+      value : "",
+      isValid : undefined,
+      password : "",
+      passwordIsValid : undefined
+  })
+
+  const {isValid , passwordIsValid } = emailIsValid;
 
   useEffect(()=>{
     const identifier = setTimeout(()=>{
-      console.log('checking');
-      setFormIsValid(
-        enteredEmail.includes('@') && enteredPassword.trim().length > 6
-      );  
-    },500);
+      console.log('check');
+      setFormIsValid(emailIsValid.value && emailIsValid.passwordIsValid);  
+    },1000);
 
     return ()=>{
       console.log('클린업');
       clearTimeout(identifier);
     };
-  },[enteredEmail , enteredPassword]);
 
+  },[isValid , passwordIsValid]);
+ 
   
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    dispatch({type: 'EMAIL_INPUT', val : event.target.value});
   };
 
   const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
+    dispatch({type:'PASSWORD_INPUT' , password : event.target.value});
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes('@'));
+    dispatch({type: 'EMAIL_BLUR'});
   };
 
-  const validatePasswordHandler = () => {
-    setPasswordIsValid(enteredPassword.trim().length > 6);
-  };
+  // const validatePasswordHandler = () => {
+  //   dispatch({type: });
+  // };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(emailIsValid);
   };
 
   return (
@@ -52,30 +73,30 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ''
+            emailIsValid.isValid === false ? classes.invalid : ''
           }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            value={emailIsValid.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
         </div>
         <div
           className={`${classes.control} ${
-            passwordIsValid === false ? classes.invalid : ''
+            emailIsValid.passwordIsValid === false ? classes.invalid : ''
           }`}
         >
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
-            value={enteredPassword}
+            value={emailIsValid.password}
             onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
+            // onBlur={validatePasswordHandler}
           />
         </div>
         <div className={classes.actions}>
