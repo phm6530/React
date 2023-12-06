@@ -1,8 +1,9 @@
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import { AuthContext } from '../../store/auto-context';
 
 const reducer = (state , action) =>{
   switch(action.type){
@@ -19,6 +20,7 @@ const reducer = (state , action) =>{
 }
 
 const Login = (props) => {
+  const authCtx = useContext(AuthContext);
   // const [enteredEmail, setEnteredEmail] = useState('');
   // const [emailIsValid, setEmailIsValid] = useState();
   // const [enteredPassword, setEnteredPassword] = useState('');
@@ -31,20 +33,19 @@ const Login = (props) => {
       passwordIsValid : undefined
   })
 
-  const {isValid , passwordIsValid } = emailIsValid;
 
-  useEffect(()=>{
-    const identifier = setTimeout(()=>{
+
+  useEffect(() => {
+    const identifier = setTimeout(() => {
       console.log('check');
-      setFormIsValid(emailIsValid.value && emailIsValid.passwordIsValid);  
-    },1000);
-
-    return ()=>{
-      console.log('클린업');
+      setFormIsValid(emailIsValid.value && emailIsValid.passwordIsValid);
+    }, 1000);
+  
+    return () => {
+      console.log('cleanup');
       clearTimeout(identifier);
     };
-
-  },[isValid , passwordIsValid]);
+  }, [emailIsValid.value, emailIsValid.passwordIsValid]);
  
   
   const emailChangeHandler = (event) => {
@@ -65,7 +66,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailIsValid);
+    authCtx.onLogin();
   };
 
   return (

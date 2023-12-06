@@ -1,42 +1,24 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useContext } from 'react';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
+import {AuthContext} from './store/auto-context';
+
 
 function App() {
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // 로컬스토리지로 로그인 구현
-  useEffect(()=>{
-    const userLocalLogin = localStorage.getItem('isLogin');
-    if(userLocalLogin === '1'){
-      setIsLoggedIn(true);
-    }
-  },[]);
-
-
-
-  const loginHandler = (email, password) => {
-    
-    localStorage.setItem('isLogin', '1');
-    setIsLoggedIn(true);
-  };
-
-  const logoutHandler = () => {
-    localStorage.removeItem('isLogin');
-    setIsLoggedIn(false);
-  };
-
+const ctx = useContext(AuthContext);
+  console.log(ctx.isLoggedIn);
   return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-      <main>
-        {!isLoggedIn && <Login onLogin={loginHandler} />}
-        {isLoggedIn && <Home onLogout={logoutHandler} />}
-      </main>
-    </React.Fragment>
+        
+        <>
+            <MainHeader isAuthenticated={ctx.isLoggedIn} onLogout={ctx.onLogout} />
+            <main>
+              {!ctx.isLoggedIn && <Login />}
+              {ctx.isLoggedIn && <Home />}
+            </main>
+            </>
   );
 }
 
