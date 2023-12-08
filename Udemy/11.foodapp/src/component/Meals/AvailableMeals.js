@@ -28,7 +28,6 @@ const MealListArr = [
 
 
 export default function AvailableMeals(){
-    
     const MealList = MealListArr.map((e)=> <MealItem key={e.id} data={e}/>)
 
     return(
