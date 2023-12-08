@@ -13,7 +13,7 @@
 }
 
 .summary {
-  width: 10rem;
+  width: 20rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,6 +30,8 @@
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
   color: #363636;
+  margin-right: auto;
+  margin-left: 20px;
 }
 
 .actions {
