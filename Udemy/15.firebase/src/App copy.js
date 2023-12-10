@@ -12,14 +12,14 @@ function App() {
   const fetchMoviesHandler = useCallback(async () => {
     dispatch({type : actionType.DATABASE_REPONSE })
     try {
-      const response = await fetch('https://fir-967c0-default-rtdb.firebaseio.com/movie.json');
+      const response = await fetch('https://udemy-5401e-default-rtdb.firebaseio.com/movie.json');
 
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
 
       const data = await response.json();
-      const Arr = Object.keys(data).map((key) => ({...data[key] , id : key}));
+      const Arr = Object.keys(data).map((key) => ({ id: key, ...data[key] }));
       
       dispatch({type : 'FETCH_SUCESSES' , payload : Arr});
 
@@ -30,26 +30,28 @@ function App() {
   }, []);
 
 
-  useEffect(() => {
-    fetchMoviesHandler();
-  }, [fetchMoviesHandler]);
+  // useEffect(() => {
+  //   fetchMoviesHandler();
+  // }, [fetchMoviesHandler]);
 
 
   async function addMovieHandler(movie) {
-    try {
-      const response = await fetch('https://fir-967c0-default-rtdb.firebaseio.com/movie.json', {
-        method: 'POST',
-        body: JSON.stringify(movie),
-        headers: {
-          'Content-Type': 'application/json'
+    try{
+      const response = await fetch('https://udemy-5401e-default-rtdb.firebaseio.com/movie.json', {
+        method : 'POST',
+        // body : JSON.stringify({...movie , id : uuidv4()}),
+        body : JSON.stringify({...movie}),
+        headers : {
+          'Content-Type' : 'application/json'
         }
-      });
-  
-      if (!response.ok) {
-        throw new Error('Server returned an Error!!');
+      })
+      if(!response.ok){
+        throw new Error('Server returned an Error!!1');
       }
-      dispatch({type : 'ADD'});
-    } catch (error) {
+      fetchMoviesHandler();
+      console.log(await response.json());
+    }
+    catch(error){
       console.log(error.message);
     }
   }
@@ -57,14 +59,16 @@ function App() {
   const movieDelete = async(id) => {
     dispatch({type : 'DELETE_ING'});
     try{
-      await fetch(`https://fir-967c0-default-rtdb.firebaseio.com/movie/${id}.json` , 
+      await fetch(`https://udemy-5401e-default-rtdb.firebaseio.com/movie/${id}.json` , 
       {
         method : 'DELETE',
+        // body : JSON.stringify(state.movie.filter((e)=> e.id !== id)),
         headers : {
           'Content-Type' : 'application/json'
         }
       })
       dispatch({type : 'DELETE_SUCESSES'});
+      fetchMoviesHandler()
     }
     catch(error){
       console.log(error.message);
@@ -78,10 +82,7 @@ function App() {
   if(state.movie){
     content = <MoviesList movieDelete={movieDelete} movies={state.movie}/>
   }
-  if (state.movie === 0) {
-    content = <p>데이터가 없습니다.</p>;
-  }
-  if(state.error){
+  if (state.error) {
     content = <p>{state.error}</p>;
   }
   if (state.isLoading) {
@@ -95,7 +96,7 @@ function App() {
   return (
     <React.Fragment>
       <section>
-        <AddMovie onAddMovie={addMovieHandler} />
+        <AddMovie onAddMovie={() =>addMovieHandler()} />
       </section>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
@@ -106,4 +107,3 @@ function App() {
 }
 
 export default App;
- 
