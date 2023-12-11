@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useCallback } from 'react';
+import React, { useEffect, useState  } from 'react';
 
 import Tasks from './components/Tasks/Tasks';
 import NewTask from './components/NewTask/NewTask';
@@ -7,7 +7,7 @@ import useCustumHook from './CustumHook';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  
+
   const fetchData = (data) =>{
     console.log(data);
     const loadedTasks = [];
