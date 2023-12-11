@@ -23,16 +23,16 @@ export default function Login(){
         passwordValue : '',
         isPasswordValid : false
     })
+
     const ctx = useContext(AuthContext);
-    console.log(ctx);
+    
 
     // 디바운싱 구현
     useEffect(()=>{
         const deBounce = setTimeout(()=>{
             setFormValid(inputValues.isIdValid && inputValues.isPasswordValid);
-            console.log(inputValues.isIdValid);
-            console.log(inputValues.isPasswordValid);
         },1000);
+        
         return ()=>{
             clearTimeout(deBounce);
             console.log('클린업');
@@ -53,7 +53,7 @@ export default function Login(){
             <Input 
                 data={{
                     type:'email',
-                    value : '',
+                    value : inputValues.idValue,
                     onchange : userEmail
                 }}
             />
@@ -61,7 +61,7 @@ export default function Login(){
             <Input 
                 data={{
                     type:'password',
-                    value : '',
+                    value : inputValues.passwordValue,
                     onchange : userPassword
                 }}
             />

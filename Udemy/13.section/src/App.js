@@ -1,38 +1,23 @@
-import React  , {useState , useEffect, useMemo }from 'react';
+import React  , {useState ,  useMemo,}from 'react';
 import Button from './components/UI/Button/Button';
-import { v4 as uuidv4 } from 'uuid';
+import Demo from './components/Demo';
+
 
 import './App.css';
 
 function App() {
-  const [value , setValue ] = useState('');
-  const [bulian, setBulian ] = useState(false);
-  const userObj = useMemo(()=>{
-    return [
-      {
-        user : bulian ? 'Hyunmin'  : 'hy'
-      }
-    ]
-  },[bulian])
+  const [Name , setName ] = useState('변경 전');
 
-  useEffect(()=>{
-    console.log('App mount');
-  },[userObj]);
+  const listItem = useMemo(()=>{
+    return [5,4,2,7,10];
+  },[]);
 
-  const inputHandler = (e) =>{
-      setValue(e.target.value);
-  }
-
-  // const result = () =>{
-  //     setList(prev => [...prev , { user: value}])
-  //     setValue('');
-  // }
   
+
   return (
     <div className="app">
-        {userObj[0].user}
-        <input type="text" value={value} onChange={inputHandler} />
-        <Button onClick={() => setBulian(!bulian)}>hi</Button>
+        <Demo title={Name} item={listItem}/>
+        <Button onClick={() => setName('변경 됨')}>Change List</Button>
     </div>
   );
 }
