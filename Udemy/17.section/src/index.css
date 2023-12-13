@@ -100,3 +100,8 @@ button:active {
 .error-text {
   color: #b40e0e;
 }
+
+button[disabled]{
+  background-color: rgb(160, 160, 160);
+  border: 0;
+}
