@@ -6,8 +6,8 @@ const BasicForm = (props) => {
     isValid : nameIsValid , 
     InputIsvalid : nameInputIsvalid ,
     Touched : setTouched, 
-    setInput : setName 
-
+    setInput : setName ,
+    reset : nameReset
   } = useCustunHook('');
 
   const {
@@ -15,7 +15,8 @@ const BasicForm = (props) => {
     isValid : lastNameIsValid , 
     InputIsvalid : lastnameInputIsvalid ,
     Touched : lastnameSetTouched, 
-    setInput : setLastName 
+    setInput : setLastName ,
+    reset : lastNameReset
 
   } = useCustunHook('');
 
@@ -24,7 +25,8 @@ const BasicForm = (props) => {
     isValid : emailIsValid , 
     InputIsvalid : emailInputIsvalid ,
     Touched : emailSetTouched, 
-    setInput : setEmail 
+    setInput : setEmail ,
+    reset : emailReset
 
   } = useCustunHook('');
 
@@ -36,7 +38,10 @@ const BasicForm = (props) => {
       lastnameSetTouched(true);
       emailSetTouched(true);
 
-      if(!nameIsValid || !lastNameIsValid || emailIsValid) return;
+      if(!nameIsValid || !lastNameIsValid || !emailIsValid) return;
+      nameReset();
+      lastNameReset();
+      emailReset();
       console.log('제출');
   }
 
