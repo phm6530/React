@@ -4,7 +4,8 @@ const CartContext = React.createContext({
     item: [],
     total : 0 ,
     addItem : () => {},
-    removeItem : () =>{}
+    removeItem : () =>{},
+    clearItem : () => {}
 })
 
 const reducer = (state, action) =>{
@@ -41,7 +42,10 @@ const reducer = (state, action) =>{
                     return updatedItems;
                 }
             }
-        } else {
+        }  else if (action.type === 'RESET') {
+            return [];
+        } 
+        else {
             return state;
         }
 }
@@ -58,21 +62,46 @@ const CartProvider = (props) =>{
         dispatch({type: 'DELETE' , payload : id});
     };
 
+    const  clearItem = () =>{
+        dispatch({type: 'RESET'});
+    }
 
+
+    // useEffect(()=>{
+    //     const addFetchData = async(data) => {
+    //         try{
+    //             const response = await fetch('https://foodapp-5016b-default-rtdb.firebaseio.com/')
+    //             if(!response.ok){
+    //                 throw new Error('Server returned an Error!!');
+    //             }
+        
+    //         }
+    //         catch(error){
+    //             console.error(error.message);
+    //         }
+    //         finally{
+                
+    //         }
+    //     }
+    // },[]);
+
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
-        console.log('MealITEm : ',  MealItem);
+        // console.log(MealItem);
     },[MealItem]);
 
     const totalPrice = MealItem.reduce((sum , value)=>{
         return sum + value.total;
     }, 0);
-    
+     
 
     const CartValue = {
         item : MealItem,
         total : totalPrice.toFixed(2) ,
         addItem : addItemhandelr,
-        removeItem : removeItemhandelr
+        removeItem : removeItemhandelr,
+        clearItem
     }
 
     return(

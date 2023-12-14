@@ -1,39 +1,56 @@
 import classes from './AvailableMeals.module.css';
 import MealItem from './MealItem';
 import Card from '../Card/Card';
-import { v4 as uuidv4 } from 'uuid';
 
-
-const MealListArr = [
-    {
-        id : uuidv4(),
-        MealName : 'SuShi',
-        description : 'Des',
-        pirce : 18.99
-    },
-    {
-        id : uuidv4(),
-        MealName : 'Time',
-        description : 'Des',
-        pirce : 15.99
-    },
-    {
-        id : uuidv4(),
-        MealName : 'Lemon',
-        description : 'Des',
-        pirce : 12.99
-    },
-    
-]
-
+import { useState, useEffect } from 'react';
 
 export default function AvailableMeals(){
-    const MealList = MealListArr.map((e)=> <MealItem key={e.id} data={e}/>)
+    const [MealListArr , setMealListArr] = useState({})
+    const [loading , setLoading ] =useState(false);
+
+    
+
+    // fireBase 데이터 뿌리기
+    const fetchData = () =>{
+        setLoading(true);
+        fetch('https://foodapp-5016b-default-rtdb.firebaseio.com/meals.json')
+        .then(res =>{
+            if(!res.ok){
+                throw new Error('연결 안됨');
+            }  
+            return res.json();
+        })
+        .then(data =>{
+            setMealListArr(data)
+            setLoading(false);
+            return data;
+        })
+        .catch(error =>{
+            console.error(error.message);
+        })
+    }
+
+    useEffect(()=>{
+        fetchData();
+    },[]);
+
+    
+    const objValue = Object.values(MealListArr);
+
+    const MealList = objValue.map((e)=>{
+        console.log(e);
+        return <MealItem key={e.id} data={e}/>
+    });
+
+    // console.log(MealList)
 
     return(
         <>
             <section className={classes.meals}>   
+           
                 <Card>
+                    {loading && 'loading...'}
+                    
                     <ul>{MealList}</ul>
                 </Card>     
             </section>

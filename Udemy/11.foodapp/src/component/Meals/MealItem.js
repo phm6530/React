@@ -5,25 +5,29 @@ import { CartContext } from '../../Context/CartContext';
 
 
 export default function MealItem(props){
-    const { MealName , description , pirce , id} = props.data;
+    const { name , description , price , id} = props.data;
+    // console.log(pirce)
+
     const ctx = useContext(CartContext);
-    
+
     const MealAmount = (cnt, _ )=>{
             ctx.addItem({
                 id : id,
-                name : MealName,
+                name,
                 Amount : cnt, 
-                price : pirce 
+                price : price 
             })
     }
+
+    
 
     return(
         <>
             <li className={classes.meal}>
                 <div>
-                    <h3>{MealName}</h3>
+                    <h3>{name}</h3>
                     <div className={classes.description}>{description}</div>
-                    <div className={classes.price}>${pirce}</div>
+                    <div className={classes.price}>${price}</div>
                 </div>
                 <div>
                     <MealItemForm Acount={MealAmount}/>
