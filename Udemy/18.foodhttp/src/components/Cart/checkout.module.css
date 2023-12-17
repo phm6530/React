@@ -1,0 +1,12 @@
+.control{
+    width: 100%;
+}
+.control input{
+    outline: none;
+    border: 0;
+}
+
+.control .name{
+    display: inline-block;
+    width: 20%;
+}

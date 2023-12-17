@@ -1,4 +1,4 @@
-import { configureStore , combineReducers } from '@reduxjs/toolkit'
+import { configureStore  } from '@reduxjs/toolkit'
 
 import counterSlice from './counter'; // Counter
 import AuthSlice from './auth'; // Auth 

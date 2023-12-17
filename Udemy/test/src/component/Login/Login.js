@@ -4,7 +4,7 @@ import { useEffect, useReducer, useState } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../conText/AuthContext';
 
-const Reducer= (state, action)=>{
+const Reducer = (state, action)=>{
     switch(action.type){
         case 'USER_INPUT' :
             return {...state , idValue : action.idValue , isIdValid : action.idValue.includes('@') && action.idValue.trim().length > 6};
