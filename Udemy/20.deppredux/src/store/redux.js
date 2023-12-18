@@ -1,18 +1,15 @@
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-
-
 const initialCart = {
     cart: {},
     total: 0, //가격
     allProductCounter : 0, //전체갯수
-    errorMessage : null
 };
 
 // 함수로 Total 컨트롤
 const updateAllproductCounter = (state) =>{
     const cartObjValue = Object.values(state.cart);
-    console.log(cartObjValue);
+
     const productSum = cartObjValue.reduce((sum , item)=> sum += item.count  , 0);
     state.allProductCounter = productSum;
 }
@@ -25,7 +22,6 @@ const cartViewSlice = createSlice({
             state.view = !state.view;
         }
     }
-
 });
 
 const cartProductSlice = createSlice({
@@ -35,13 +31,12 @@ const cartProductSlice = createSlice({
         addItem(state, action) {
             const item = action.payload;
             if(!state.cart[item.id]){
-                state.cart[item.id] = {...item , count : 1};
+                state.cart[item.id] = {...item , count : 1 , errorMessage: true };
             }else{
-                state.errorMessage = '이미 추가된 상품입니다'
+                state.cart[item.id].errorMessage = false
             }
             updateAllproductCounter(state);
         },
-
 
         inCrement(state , action) {
             state.cart[action.payload].count ++;
@@ -68,7 +63,7 @@ const cartProductSlice = createSlice({
     }
 });
 
-// configutreStore <-- 2
+
 const store = configureStore({
     reducer: {
         cartProduct: cartProductSlice.reducer,

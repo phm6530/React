@@ -7,9 +7,7 @@ const ProductItem = (props) => {
   const { title, price, description } = props;
   const dispatch = useDispatch();  
   const cartState = useSelector(state => state.cartProduct);
-
-  // console.log(cartState);
-
+  // console.log( 'redux : ',cartState.cart[props.id] );
   // console.log(props);
 
   const selectProduct = () =>{
@@ -20,7 +18,7 @@ const ProductItem = (props) => {
     
     <li className={classes.item}>
       <Card>
-        {cartState.errorMessage && 'ggg'}
+        {cartState.cart[props.id] && <p style={{color : '#1ad1b9'}}>장비구니에 추가된 상품입니다.</p>}
         <header>
           <h3>{title}</h3>
           <div className={classes.price}>${price.toFixed(2)}</div>

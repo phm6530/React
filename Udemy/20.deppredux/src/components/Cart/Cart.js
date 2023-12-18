@@ -7,13 +7,8 @@ const Cart = (props) => {
   // const [cartView , setCartView ] = useState(false);
   const cartItems = useSelector(state => state.cartProduct.cart);
   const test = useSelector(state => state.cartView.view);
-
-  console.log('test : ',test);
-
-
   const cartCounter = Object.values(cartItems);
 
-  console.log(cartCounter)
 
   const contents = <Card className={classes.cart}>
     <h2>Your Shopping Cart</h2>
