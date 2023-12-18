@@ -17,6 +17,17 @@ const updateAllproductCounter = (state) =>{
     state.allProductCounter = productSum;
 }
 
+const cartViewSlice = createSlice({
+    name : 'view',
+    initialState : {view : false},
+    reducers: {
+        view(state, action) {
+            state.view = !state.view;
+        }
+    }
+
+});
+
 const cartProductSlice = createSlice({
     name: 'cartProduct',
     initialState: initialCart,
@@ -52,19 +63,20 @@ const cartProductSlice = createSlice({
                 state.cart = filteredCart;
             }
             updateAllproductCounter(state);
-            
         }
         
     }
 });
 
-
+// configutreStore <-- 2
 const store = configureStore({
     reducer: {
-        cartProduct: cartProductSlice.reducer
+        cartProduct: cartProductSlice.reducer,
+        cartView : cartViewSlice.reducer
     }
 });
 
 // 모든 액션 크리에이터를 한 객체로 내보내기
 export const cartActions = cartProductSlice.actions;
+export const viewActions = cartViewSlice.actions;
 export default store;
