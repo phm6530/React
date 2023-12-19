@@ -1,0 +1,4 @@
+
+li .active{
+    color : var( --color-primary-600);
+}
