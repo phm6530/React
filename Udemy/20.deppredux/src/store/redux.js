@@ -15,12 +15,20 @@ const updateAllproductCounter = (state) =>{
 }
 
 const cartViewSlice = createSlice({
-    name : 'view',
-    initialState : {view : false},
+    name : 'ui',
+    initialState : {view : false , notification : null} ,
     reducers: {
         view(state, action) {
             state.view = !state.view;
+        },
+        showNotification(state , action){
+            state.notification = {
+                status : action.payload.status,
+                title : action.payload.title,
+                message : action.payload.message
+            }
         }
+
     }
 });
 

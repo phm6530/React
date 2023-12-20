@@ -16,6 +16,12 @@ import ProductEdit from './component/ProductEdit';
 // Error
 import Error from './component/Error/Error';
 
+
+// Router Animation 
+import { useRoutes, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
+
 const router = createBrowserRouter([
   {
     path: '/', 
@@ -43,6 +49,7 @@ const router = createBrowserRouter([
     ]
   },
 ]);
+
 
 function App() {
   return (

@@ -7,8 +7,6 @@ const ProductItem = (props) => {
   const { title, price, description } = props;
   const dispatch = useDispatch();  
   const cartState = useSelector(state => state.cartProduct);
-  // console.log( 'redux : ',cartState.cart[props.id] );
-  // console.log(props);
 
   const selectProduct = () =>{
     dispatch(cartActions.addItem(props))

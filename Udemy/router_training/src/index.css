@@ -56,3 +56,103 @@ main{
 button{
   margin: 1rem;
 }
+
+
+
+/* fade */
+/* Fade.css */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 1000ms;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 1000ms;
+}
+
+
+h1{
+  animation: ani .5s ease;
+}
+
+@keyframes ani {
+    0%{
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100%{
+        opacity: 1;
+        transform: translateY(0px);
+    } 
+}
+
+.balckWrap{
+  background-color: #000;
+}
+
+.aniclass{
+  animation: hidden .5s ease forwards;
+  transition-delay: background-color .5s;
+}
+
+.blockAnimation{
+  animation: block .5s ease forwards;
+}
+
+@keyframes hidden {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+} 
+
+.Home{
+  background-color: rgb(240, 98, 98);
+  transition-delay: .5s;
+}
+
+.page{
+  background-color: rgb(43, 44, 121);
+  transition-delay: .5s;
+}
+
+
+@keyframes block {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+/* 
+
+
+.removeAnimation {
+  animation: del 0.5s ease;
+}
+
+@keyframes del {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50px);
+    opacity: 0;
+  }
+} */

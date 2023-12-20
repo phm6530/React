@@ -1,18 +1,18 @@
 import ProductItem from './ProductItem';
 import classes from './Products.module.css';
-import uuid4 from 'uuid4';
+// import uuid4 from 'uuid4';
 
 const Products = (props) => {
 
   const products = [
         { 
-          id : uuid4(),
+          id : 1,
           title : 'My First Book',
           price : 10,
           description : 'My frist Book desciprtion'
         },
         { 
-          id : uuid4(),
+          id : 2,
           title : 'My Second Book',
           price : 11,
           description : 'My Second Book desciprtion'
