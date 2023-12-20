@@ -39,8 +39,8 @@ const router = createBrowserRouter([
             id : 'Products-Loader',
             loader: ProductsItem ,
             children : [
-              { index:true,  element : <ProductItem/>},
-              { path : 'edit',  element : <ProductEdit/> }
+              { index:true,  element : <ProductItem/>}, // 상위로 분류 
+              { path : 'edit',  element : <ProductEdit/> } // 하위로 분류
             ] 
           }
 

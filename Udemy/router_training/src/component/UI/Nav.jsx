@@ -40,7 +40,7 @@ export default function Nav(){
                         to='page1'>Page 1</ NavLink>
                     </li>
                     <li>
-                        <NavLink     onClick={()=>btnChange('products')}
+                        <NavLink onClick={()=>btnChange('products')}
                         className={({isActive})=>isActive ? classes.active : undefined}
                         to='products'>Products</ NavLink>
                     </li>
