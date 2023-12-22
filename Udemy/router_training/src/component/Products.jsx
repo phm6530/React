@@ -1,13 +1,16 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData , Link } from 'react-router-dom';
 import ProductsList from './ProductsList';
 
 export default function Products(){
     const data = useLoaderData();
     // const data = useLoaderData('tester');
     const event = data.events;
-    
+    console.log(event);
     return(
         <>
+            <Link to={'new'}>
+                <button>New</button>
+            </Link>
             <ProductsList data={event}/>
         </>
     )

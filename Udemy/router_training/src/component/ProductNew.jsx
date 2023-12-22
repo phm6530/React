@@ -1,37 +1,41 @@
-import EventForm from '../components/EventForm';
-import { redirect } from 'react-router-dom';
+// import { redirect } from 'react-router-dom';
+import ProductForm from './ProductForm';
 
-export default function  NewEventPage(){
+export default function ProductNew(){
 
     return(
         <>
-               <EventForm/> 
+            <ProductForm/>
         </>
     )
 }
 
 
-export async function action({request}){
+export async function action({request , params}){
 
     const data = await request.formData();
 
     const formData = {
-        title : data.get('title'),
+        title: data.get('title'),
         image : data.get('image'),
         date : data.get('date'),
         description : data.get('description')
     }
-    console.log(formData);
 
     const response = await fetch('http://localhost:8080/events/',{
-        method : 'POST',
-        headers : {
+        method:'POST',
+        headers:{
             'Content-Type': 'application/json'
         },
         body : JSON.stringify(formData)
     })
 
-    console.log('완료');
+    if(!response.ok){
+        throw new Error('error');
+    }
+    console.log('완료!');
 
-    return redirect('..');
+
+    return response
+
 }

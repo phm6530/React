@@ -1,11 +1,1 @@
-{
-  "events": [
-    {
-      "id": "e1",
-      "title": "A dummy event",
-      "date": "2023-02-22",
-      "image": "https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg",
-      "description": "Join this amazing event and connect with fellow developers."
-    }
-  ]
-}
+{"events":[{"title":"hi","image":"https://cdn.gameple.co.kr/news/photo/202312/208130_220531_920.jpg","date":"2024-01-03","description":"TEST 다시한번","id":"726aeeb1-1ec7-49ea-92d2-553b1f40897d"},{"title":"343","image":"https://cdn.gameple.co.kr/news/photo/202312/208130_220531_920.jpg","date":"2023-12-23","description":"34636","id":"5d107126-4c79-4278-b8c0-5dc2a66804ff"},{"title":"343","image":"https://cdn.gameple.co.kr/news/photo/202312/208130_220531_920.jpg","date":"2023-12-23","description":"34636","id":"f4fbe125-e88e-4f30-8d08-66235f59bf75"},{"title":"343","image":"https://cdn.gameple.co.kr/news/photo/202312/208130_220531_920.jpg","date":"2023-12-23","description":"34636","id":"3cd222cf-53a3-4e6f-b079-d9eecedab71b"},{"title":"tester","image":"https://dsgsg@naver.com","date":"2023-12-30","description":"32525252525","id":"49e2c89c-6a7b-4699-b9c9-9a0f8caeeca6"},{"title":"Form Test","image":"https://cdn.gameple.co.kr/news/photo/202312/208130_220531_920.jpg","date":"2023-12-23","description":"테슽,","id":"99cb4335-beca-4d1f-9f65-185ff9967aee"},{"title":"3626236","image":"https://dsgsg@naver.com","date":"2023-12-23","description":"36262626","id":"577b59ff-e897-4c40-b4ee-f8455eb04967"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}]}

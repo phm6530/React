@@ -4,7 +4,7 @@ import Homepage from './pages/Homepage';
 import Eventpage ,{ Loader as eventLoader }from './pages/eventPage';
 import ErrorPage from './pages/ErrorPage';
 import EventDetailPage , { Loader as eventDetailLoader }from './pages/EventDetailPage';
-import NewEventPage from './pages/NewEventPage';
+import NewEventPage , { action as NewEventAction  } from './pages/NewEventPage';
 import EditEventPage from './pages/EditEventPage';
 import EventRoot from './pages/EventRoot';
 import Error from './components/Error';
@@ -49,26 +49,24 @@ const router = createBrowserRouter([
 
         { path:'event' , 
             element : <EventRoot/> , 
+            errorElement : <Error/>,
+
             children:[
-              { 
-                index: true , 
-                element : <Eventpage/>,
-                loader : eventLoader,
-                errorElement : <Error/>
-              }, // event New Write
+              {  index: true ,  loader : eventLoader, element : <Eventpage/> }, // event New Write
+
               { 
                 path:':item' , 
                 id : 'event-loader',
                 loader : eventDetailLoader, 
+
                 children : [
-                  { index : true ,  
-                    element : <EventDetailPage/> 
-                  },
+                  { index : true , element : <EventDetailPage/> },
                   { path:'edit' , element : <EditEventPage/>
-                } // event Item edit
+                } 
+
               ]
-            }, // event view Item
-            { path:'new' , element : <NewEventPage/>}, // event New Write
+            }, 
+            { path:'new' , element : <NewEventPage/> , action : NewEventAction}, // event New Write
             
             ]
         }, // event

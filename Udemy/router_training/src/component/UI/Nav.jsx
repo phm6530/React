@@ -46,7 +46,7 @@ export default function Nav(){
                     </li>
 
                 </ul>
-                <button onClick={()=>setDarkMode(prev => !prev)}>Toggle</button>
+                {/* <button onClick={()=>setDarkMode(prev => !prev)}>Toggle</button> */}
             </nav>
         </header>
         </div>

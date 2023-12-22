@@ -17,8 +17,8 @@ export default function ProductItem(){
 }
 
 export async function loader({params}){
+    console.log(params);
     const id = params.item;
-    console.log(id);
     
     const response = await fetch('http://localhost:8080/events/' + id);
     return response;

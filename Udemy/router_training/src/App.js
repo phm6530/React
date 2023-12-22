@@ -12,21 +12,23 @@ import RootLayout from './Rootfile/RootLayout';
 import Products, { loader as ProductsLoader } from './component/Products';
 import ProductItem , { loader as ProductsItem}from './component/ProductItem';
 import ProductEdit from './component/ProductEdit';
+import ProductNew , { action as ProductNewAction } from './component/ProductNew';
 
 // Error
 import Error from './component/Error/Error';
 
 
 // Router Animation 
-import { useRoutes, useLocation } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+// import { useRoutes, useLocation } from 'react-router-dom';
+// import { TransitionGroup, CSSTransition } from 'react-transition-group';
+
 
 
 const router = createBrowserRouter([
   {
     path: '/', 
     element: <RootLayout />,
-    errorElement: <Error />,
+    // errorElement: <Error />,
     children: [
       { index: true, element: <HomePage /> }, // home
       
@@ -35,15 +37,18 @@ const router = createBrowserRouter([
         path: 'products',
         children: [
           { index: true, element: <Products />, loader: ProductsLoader },
-          { path : ':item' ,
+
+          { path : ':item' , //:item 같은걸 Url 파라미터라고 칭함
             id : 'Products-Loader',
             loader: ProductsItem ,
             children : [
-              { index:true,  element : <ProductItem/>}, // 상위로 분류 
+              { index: true ,  element : <ProductItem/>}, // 상위로 분류 
               { path : 'edit',  element : <ProductEdit/> } // 하위로 분류
             ] 
-          }
+          },
 
+          { path : 'new',  element : <ProductNew/> , action : ProductNewAction 
+          } // 하위로 분류
         ]
       }
     ]
