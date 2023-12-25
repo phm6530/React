@@ -50,6 +50,16 @@ export async function action({request}){
         throw json({message : 'error!!'} , {status : 500});
       }
 
+      //토큰 받기
+      const resData = await response.json();
+      const token = resData.token
+      
+      // 토큰은 쿠키, 로컬스토리지 , 세션 으로 저장이가능
+
+      // 로컬스토리지로 저장
+      localStorage.setItem('token', token);
+      
+
       return redirect('/');
       
 }

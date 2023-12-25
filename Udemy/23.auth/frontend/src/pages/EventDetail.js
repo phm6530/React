@@ -10,6 +10,9 @@ import {
 import EventItem from '../components/EventItem';
 import EventsList from '../components/EventsList';
 
+// 토큰얻기
+import { getAuthToken } from '../util/auth';
+
 function EventDetailPage() {
   const { event, events } = useRouteLoaderData('event-detail');
 
@@ -20,6 +23,7 @@ function EventDetailPage() {
           {(loadedEvent) => <EventItem event={loadedEvent} />}
         </Await>
       </Suspense>
+      
       <Suspense fallback={<p style={{ textAlign: 'center' }}>Loading...</p>}>
         <Await resolve={events}>
           {(loadedEvents) => <EventsList events={loadedEvents} />}
@@ -78,8 +82,16 @@ export async function loader({ request, params }) {
 
 export async function action({ params, request }) {
   const eventId = params.eventId;
+
+  // 토큰얻기
+  const token = getAuthToken();
+  console.log(token);
+
   const response = await fetch('http://localhost:8080/events/' + eventId, {
     method: request.method,
+    headers : {
+      'Authorization' : 'Bearer ' + token 
+    }
   });
 
   if (!response.ok) {
