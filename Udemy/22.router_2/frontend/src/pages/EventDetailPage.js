@@ -1,4 +1,4 @@
-import { useNavigate , useRouteLoaderData} from 'react-router-dom';
+import { json, useNavigate , useRouteLoaderData , redirect} from 'react-router-dom';
 import EventItem from '../components/EventItem';
 
 export default function EventDetailPage(){
@@ -34,4 +34,16 @@ export async function Loader({request, params }){
     const id = params.item;
     const response = await fetch(`http://localhost:8080/events/${id}`);
     return response;
+}
+
+export async function action({params , request}){
+    const id = params.item;
+    const response = await fetch(`http://localhost:8080/events/${id}`,{
+        method : request.method
+    });
+    
+    if(!response.ok){
+        throw json({message : '삭제 안됨'}, {status: 500})
+    }
+    return redirect('..');
 }

@@ -57,7 +57,9 @@ router.post('/', async (req, res, next) => {
 
   try {
     await add(data);
-    res.status(201).json({ message: 'Event saved.', event: data });
+    setTimeout(()=>{
+      res.status(201).json({ message: 'Event saved.', event: data });
+   },1500);  
   } catch (error) {
     next(error);
   }
@@ -93,7 +95,9 @@ router.patch('/:id', async (req, res, next) => {
 
   try {
     await replace(req.params.id, data);
-    res.json({ message: 'Event updated.', event: data });
+    
+      res.json({ message: 'Event updated.', event: data });
+   
   } catch (error) {
     next(error);
   }

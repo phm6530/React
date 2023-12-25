@@ -5,12 +5,13 @@ import ProductForm from './ProductForm';
 export default function ProductEdit(){
   const Params = useParams();
   const data = useRouteLoaderData('Products-Loader');
-  console.log(data);
+  // console.log(data);
   
   return(
     <>
       id : {Params.item}
-      <ProductForm event={data.event} />/
+      <ProductForm method='patch' event={data.event} />/
     </>
   )
 }
+

@@ -3,7 +3,7 @@ import ProductsList from './ProductsList';
 
 export default function Products(){
     const data = useLoaderData();
-    // const data = useLoaderData('tester');
+
     const event = data.events;
     console.log(event);
     return(
@@ -17,9 +17,12 @@ export default function Products(){
 }
 
 export async function loader(){
+
     const response = await fetch('http://localhost:8080/events');
+
     if(!response.ok){
         throw new Error('error!');
     }
+
     return response.json();
 }

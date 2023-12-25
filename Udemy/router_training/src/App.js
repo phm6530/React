@@ -10,9 +10,11 @@ import RootLayout from './Rootfile/RootLayout';
 
 // Product 
 import Products, { loader as ProductsLoader } from './component/Products';
-import ProductItem , { loader as ProductsItem}from './component/ProductItem';
+import ProductItem , { loader as ProductsItem , action as productsDelete}from './component/ProductItem';
 import ProductEdit from './component/ProductEdit';
-import ProductNew , { action as ProductNewAction } from './component/ProductNew';
+import ProductNew from './component/ProductNew';
+
+import {action as multiAction } from './component/ProductForm';
 
 // Error
 import Error from './component/Error/Error';
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
   {
     path: '/', 
     element: <RootLayout />,
-    // errorElement: <Error />,
+    errorElement: <Error />,
     children: [
       { index: true, element: <HomePage /> }, // home
       
@@ -36,18 +38,34 @@ const router = createBrowserRouter([
       { 
         path: 'products',
         children: [
+
           { index: true, element: <Products />, loader: ProductsLoader },
 
           { path : ':item' , //:item 같은걸 Url 파라미터라고 칭함
             id : 'Products-Loader',
             loader: ProductsItem ,
             children : [
-              { index: true ,  element : <ProductItem/>}, // 상위로 분류 
-              { path : 'edit',  element : <ProductEdit/> } // 하위로 분류
+
+              { 
+                index: true ,  
+                element : <ProductItem/>,
+                action : productsDelete
+              }, // 상위로 분류 삭제버튼 추가 ok
+
+              { 
+                path : 'edit',  
+                element : 
+                <ProductEdit/> ,
+                action : multiAction
+                // action : multiAction
+              } // 하위로 분류 수정하기 로직 추가
             ] 
           },
 
-          { path : 'new',  element : <ProductNew/> , action : ProductNewAction 
+          { 
+            path : 'new',  
+            element : <ProductNew/> , 
+            action : multiAction
           } // 하위로 분류
         ]
       }
