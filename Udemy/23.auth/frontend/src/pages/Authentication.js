@@ -58,8 +58,12 @@ export async function action({request}){
 
       // 로컬스토리지로 저장
       localStorage.setItem('token', token);
-      
 
+
+      const expiration = new Date();
+      expiration.setMinutes(expiration.getMinutes() + 2 );
+      localStorage.setItem('expiration' , expiration);
+      
       return redirect('/');
       
 }

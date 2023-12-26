@@ -5,7 +5,7 @@ import NewsletterSignup from './NewsletterSignup';
 
 function MainNavigation() {
   const token = useRouteLoaderData('root');
-  console.log(token);
+  // console.log(token);
   
   return (
     <header className={classes.header}>
@@ -64,8 +64,7 @@ function MainNavigation() {
               </Form>
               
             </li>
-          )
-          }
+          )}
 
         </ul>
       </nav>

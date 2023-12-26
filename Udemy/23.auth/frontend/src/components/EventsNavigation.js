@@ -4,7 +4,7 @@ import classes from './EventsNavigation.module.css';
 
 function EventsNavigation() {
   const token = useRouteLoaderData('root');
-  console.log(token);
+  
   return (
     <header className={classes.header}>
       <nav>

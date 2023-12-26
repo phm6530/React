@@ -17,7 +17,7 @@ import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 
 // Auth
-import AuthenticationPage , {action as authAction } from './pages/Authentication';
+import AuthenticationPage , { action as authAction } from './pages/Authentication';
 
 // logout
 import {action as logoutAction } from './pages/logout'; 
@@ -79,8 +79,7 @@ const router = createBrowserRouter([
         path : 'auth',
         element : <AuthenticationPage/>,
         action : authAction
-      }
-      ,
+      },
       {
         path : 'logout',
         action : logoutAction

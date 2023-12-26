@@ -5,7 +5,7 @@ import classes from './AuthForm.module.css';
 function AuthForm() {
   const data = useActionData();
   const useNav = useNavigation();
-  console.log('data :' , data);
+  // console.log('data :' , data);
   const errMsg = data && Object.values(data.errors);
   
   const submitting = useNav.state === 'submitting';
