@@ -8,6 +8,8 @@ function EventForm({ method  , event }) {
 
   const submitting = useNavigation().state === 'submitting';
   
+
+
   const navigate = useNavigate();
 
   function cancelHandler() {
@@ -70,15 +72,18 @@ export default EventForm;
 
 
 
+
 export async function action({request ,params}){
   console.log('params : ',params);
+  const token = localStorage.getItem('token')
+  
+  
   
   let url = 'http://localhost:8080/events/';
 
   if(request.method === 'PATCH'){
       url = 'http://localhost:8080/events/' + params.item;
   }
-  console.log(url);
 
     const data = await request.formData();
     const formData = {
@@ -87,11 +92,14 @@ export async function action({request ,params}){
       date : data.get('date'),
       description : data.get('description')
     }
+    console.log(url);
+    console.log(request.method);
 
     const response = await fetch(url,{
       method: request.method,
       headers:{
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
       },
       body : JSON.stringify(formData)
   })

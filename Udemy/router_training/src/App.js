@@ -20,6 +20,10 @@ import {action as multiAction } from './component/ProductForm';
 import Error from './component/Error/Error';
 
 
+//Authpage
+import { AuthPage } from './component/AuthPage';
+import { action as authAction } from './component/AuthPage';
+
 // Router Animation 
 // import { useRoutes, useLocation } from 'react-router-dom';
 // import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -68,6 +72,11 @@ const router = createBrowserRouter([
             action : multiAction
           } // 하위로 분류
         ]
+      },
+      {
+        path : 'auth', 
+        element : <AuthPage/>,
+        action : authAction
       }
     ]
   },

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink , useActionData } from 'react-router-dom';
 import classes from './Nav.module.css';
 import { useEffect, useState } from 'react';
 
@@ -8,6 +8,9 @@ export default function Nav(){
     const [ darkMode, setDarkMode ] = useState('Home');
     const [ touched , setTouched ] = useState(0);
 
+    const data = useActionData();
+    console.log(data);
+    
     useEffect(()=>{
         const get = document.querySelector('.View');
         get.classList.add('aniclass');
@@ -43,6 +46,15 @@ export default function Nav(){
                         <NavLink onClick={()=>btnChange('products')}
                         className={({isActive})=>isActive ? classes.active : undefined}
                         to='products'>Products</ NavLink>
+                    </li>
+                    <li>
+                        <NavLink onClick={()=>btnChange('auth')}
+                        className={({isActive})=>isActive ? classes.active : undefined}
+                        to='auth'>auth</ NavLink>
+                    </li>
+                    
+                    <li>
+                        <button>Logout</button>
                     </li>
 
                 </ul>
